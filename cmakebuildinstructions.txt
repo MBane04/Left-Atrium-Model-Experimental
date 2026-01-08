@@ -21,12 +21,12 @@ How to build:
 
         6. Restart VS Code so PATH updates apply.
 
-        7. Configure and build:
-            cmake -S . -B build
-            cmake --build build
+        7. Build:
+            .\compile.ps1
             
-            Optional: Add -DCMAKE_BUILD_TYPE=Release for optimized builds
-            Optional: Add -G "Ninja" to use Ninja instead of default generator
+            Manual alternative (requires VS Dev Shell):
+            cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
+            cmake --build build
 
     Linux (needs CUDA, OpenGL dev, GLFW dev):
         1. Install deps:
@@ -38,13 +38,22 @@ How to build:
             cmake -S . -B build
             cmake --build build
             
+            Or use the compile script:
+            bash compile
+            
             Optional: Add -DCMAKE_BUILD_TYPE=Release for optimized builds
             Optional: Add -DCMAKE_CUDA_ARCHITECTURES="75;80;86;89" for portable GPU support
 
 How to run:
 
     Windows:
-        ./build/svt.exe
+        .\run.ps1
+        
+        Or directly:
+        .\build\svt.exe
 
     Linux:
         ./build/svt
+        
+        Or use the run script:
+        bash run
