@@ -14,7 +14,9 @@
 #include <time.h>
 #include <sys/stat.h>
 #include <signal.h>
+#ifndef _WIN32
 #include <unistd.h>
+#endif
 #include <stdbool.h>
 #include <vector> //needed for VBOs
 
@@ -23,7 +25,15 @@
 
 // OpenGL headers - GLAD must come BEFORE GLFW
 #include "../include/glad/glad.h"
-#include <GL/glu.h>
+#if defined(__CUDACC__)
+	#if defined(_WIN32)
+		extern "C" void __stdcall gluLookAt(double, double, double, double, double, double, double, double, double);
+	#else
+		extern "C" void gluLookAt(double, double, double, double, double, double, double, double, double);
+	#endif
+#else
+	#include <GL/glu.h>
+#endif
 #include <GLFW/glfw3.h>
 
 // ImGui headers - use quotes for local includes, not angle brackets

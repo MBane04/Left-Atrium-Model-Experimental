@@ -1,0 +1,10 @@
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/CMakeFiles/svt.dir
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/CMakeFiles/make_nodes_and_muscles.dir
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/CMakeFiles/edit_cache.dir
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/CMakeFiles/rebuild_cache.dir
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/_deps/glfw-build/CMakeFiles/edit_cache.dir
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/_deps/glfw-build/CMakeFiles/rebuild_cache.dir
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/_deps/glfw-build/src/CMakeFiles/update_mappings.dir
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/_deps/glfw-build/src/CMakeFiles/glfw.dir
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/_deps/glfw-build/src/CMakeFiles/edit_cache.dir
+C:/Users/mbane/Documents/GitHub/Left-Atrium-Model-Experimental/build/_deps/glfw-build/src/CMakeFiles/rebuild_cache.dir

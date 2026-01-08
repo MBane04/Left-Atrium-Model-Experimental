@@ -6,6 +6,9 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <signal.h>
+#ifdef _WIN32
+#include <direct.h>
+#endif
 #define PI 3.14
 
 double Volume, Radius;
@@ -266,13 +269,21 @@ void saveNodesAndMuscle()
 	const char *folderName = "Name It";
 	
 	// Creating the diretory to hold the run settings.
+	#ifdef _WIN32
+	if(_mkdir(folderName) != 0)
+	#else
 	if(mkdir(folderName, 0777) != 0)
+	#endif
 	{
 		printf("\n Error creating Nodes and Muscles folder '%s'.\n", folderName);
 	}
 	
 	// Moving into the folder
+	#ifdef _WIN32
+	_chdir(folderName);
+	#else
 	chdir(folderName);
+	#endif
 	
 	// Copying all the Nodes into this folder in the file named Nodes.
 	FILE *NodesFile;
@@ -320,7 +331,11 @@ void saveNodesAndMuscle()
   	fclose(BachmannsBundleFile);
   	
 	// Moving back to original directory.
+	#ifdef _WIN32
+	_chdir("..");
+	#else
 	chdir("../");
+	#endif
 
 	printf("\n Nodes and Muscles have been created and saved.\n");
 }

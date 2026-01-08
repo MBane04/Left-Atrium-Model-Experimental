@@ -78,36 +78,73 @@ Video Realistic LA: 		https://youtu.be/G_ZcHeLRRjc
 
 ### Software Requirements:
 
-#### Disclosure: This simulation only works on Linux-based distros currently. All development and testing was done in Ubuntu 20.04/22.04
-
-#### This Repository contains the following:
-- [Nsight Visual Studio Code Edition](https://developer.nvidia.com/nsight-visual-studio-code-edition)
-- [CUDA](https://developer.nvidia.com/cuda-downloads)
-   - OpenGL
-        - [Nvidia Driver For OpenGL](https://developer.nvidia.com/opengl-driver)
-        - [OpenGL Index](https://www.khronos.org/registry/OpenGL/index_gl.php)
-#### Linux (Ubuntu/Debian)
-  Install Nvidia CUDA Toolkit:
-
-    sudo apt install nvidia-cuda-toolkit
-
-  Install Mesa Utils:
-
-    sudo apt install mesa-utils
+#### This simulation runs on Windows and Linux with CUDA-enabled GPUs.
 
 <a id="building-and-running"></a>    
 ## Building and Running
 
-### Building (Note: this must be done after every code change)
+### Windows
 
-  Navigate to the cloned folder and run the following command to build and compile the simulation:
+#### Prerequisites:
+1. **CMake** - Download and install from [cmake.org](https://cmake.org/download/). Ensure "Add CMake to PATH" is checked during installation.
 
-    ./compile
+2. **MSVC Build Tools** - Install the C++ workload:
+   ```powershell
+   winget install Microsoft.VisualStudio.2022.BuildTools --override "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --passive"
+   ```
 
-### Running
-  After compiling, run the simulation:
+3. **CUDA Toolkit** - Download and install from [NVIDIA CUDA Downloads](https://developer.nvidia.com/cuda-downloads). Includes NVCC and Visual Studio integration.
 
-    ./run
+4. **Ninja Build System**:
+   ```powershell
+   winget install Ninja-build.Ninja
+   ```
+
+5. **Restart VS Code** after installations so PATH updates apply.
+
+#### Building:
+```powershell
+cmake -S . -B build
+cmake --build build
+```
+
+*Optional: Add `-DCMAKE_BUILD_TYPE=Release` for optimized builds or `-G "Ninja"` to use Ninja generator.*
+
+#### Running:
+```powershell
+./build/svt.exe
+```
+
+### Linux
+
+#### Prerequisites:
+
+**Ubuntu/Debian:**
+```bash
+sudo apt update
+sudo apt install cmake ninja-build build-essential libgl1-mesa-dev libglu1-mesa-dev libglfw3-dev mesa-utils ffmpeg
+# Install CUDA toolkit from NVIDIA repo: https://developer.nvidia.com/cuda-downloads
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -Syu
+sudo pacman -S cmake ninja base-devel mesa glu glfw-x11 libx11 libxrandr libxinerama libxcursor libxi libxext libxfixes ffmpeg
+# Install CUDA toolkit from NVIDIA repo or AUR: yay -S cuda
+```
+
+#### Building:
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+*Optional: Add `-DCMAKE_BUILD_TYPE=Release` for optimized builds or `-DCMAKE_CUDA_ARCHITECTURES="75;80;86;89"` for portable GPU support (Turing/Ampere/Ada).*
+
+#### Running:
+```bash
+./build/svt
+```
 
 <a id="simulation-setup-file"></a>    
 ## Simulation Setup File 

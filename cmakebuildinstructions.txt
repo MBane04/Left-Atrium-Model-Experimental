@@ -1,0 +1,45 @@
+
+How to build:
+
+    Windows:
+        1. Install CMake (add to PATH in installer):
+            https://cmake.org/download/
+
+        2. Install MSVC Build Tools (C++ workload):
+            winget install Microsoft.VisualStudio.2022.BuildTools --override "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --passive"
+
+        3. Install CUDA Toolkit (includes NVCC + VS integration):
+            https://developer.nvidia.com/cuda-downloads
+
+        4. Install Ninja:
+            winget install Ninja-build.Ninja
+
+        5. Restart VS Code so PATH updates apply.
+
+        6. Configure and build:
+            cmake -S . -B build
+            cmake --build build
+            
+            Optional: Add -DCMAKE_BUILD_TYPE=Release for optimized builds
+            Optional: Add -G "Ninja" to use Ninja instead of default generator
+
+    Linux (needs CUDA, OpenGL dev, GLFW dev):
+        1. Install deps:
+            Ubuntu/Debian: cmake, build-essential, libgl1-mesa-dev, libglu1-mesa-dev, CUDA toolkit
+            Arch Linux: cmake, base-devel, mesa, glu, CUDA toolkit
+            (GLFW will be auto-fetched if not installed)
+
+        2. Configure and build:
+            cmake -S . -B build
+            cmake --build build
+            
+            Optional: Add -DCMAKE_BUILD_TYPE=Release for optimized builds
+            Optional: Add -DCMAKE_CUDA_ARCHITECTURES="75;80;86;89" for portable GPU support
+
+How to run:
+
+    Windows:
+        ./build/svt.exe
+
+    Linux:
+        ./build/svt

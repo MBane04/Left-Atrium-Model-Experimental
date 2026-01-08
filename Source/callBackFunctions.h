@@ -1,3 +1,11 @@
+// Platform compatibility shims for Windows
+#ifdef _WIN32
+#include <direct.h>
+#define popen _popen
+#define pclose _pclose
+#define chdir _chdir
+#define mkdir _mkdir
+#endif
 
 /*
  This file contains all the callBack functions and functions that it calls to do its work.
@@ -330,7 +338,7 @@ void screenShot()
 	//              "-threads 0 -preset fast -y -pix_fmt yuv420p -crf 21 -vf vflip output1.mp4";
 	
 	//open the pipe to ffmpeg and allocate the buffer for the screenshot with the size of 4*XWin* YWin to hold the RGBA data
-	ScreenShotFile = popen(cmd, "w");
+	ScreenShotFile = popen(cmd, "w"); // Open pipe for screenshot command
 	buffer = (unsigned char*)malloc(4 * XWindowSize*YWindowSize*sizeof(int));
 	
 	if(!Simulation.isPaused) //if the simulation is running
@@ -360,7 +368,8 @@ void screenShot()
 	// Convert back to a C-style string.
 	const char *ccx = s.c_str();
 	system(ccx);
-	system("rm output1.mp4");
+	// Portable delete of temporary file
+	remove("output1.mp4"); // Use remove instead of system call for portability
 	printf("\nScreenshot Captured: \n");
 	cout << "Saved as " << ts << ".jpeg" << endl;
 
@@ -388,8 +397,8 @@ void saveSettings()
 	cudaMemcpy( Muscle, MuscleGPU, NumberOfMuscles*sizeof(muscleAttributesStructure), cudaMemcpyDeviceToHost);
 	cudaErrorCheck(__FILE__, __LINE__);
 	
-	// Moving into the file that contains previuos run files.
-	chdir("./PreviousRunsFile");
+	// Moving into the file that contains previous run files.
+	chdir("./PreviousRunsFile"); // Change directory to previous runs
 	   	
 	// Creating an output file name to store run settings infomation in. It is unique down to the second to keep the user from 
 	// overwriting files (You just cannot save more than one file a second).
@@ -418,7 +427,11 @@ void saveSettings()
 	const char *directoryName = timeStamp.c_str();
 	
 	// Creating the diretory to hold the run settings.
-	if(mkdir(directoryName, 0777) == 0)
+	if(mkdir(directoryName
+#ifndef _WIN32
+		, 0777
+#endif
+		) == 0) // Create directory with appropriate permissions
 	{
 		printf("\n Directory '%s' created successfully.\n", directoryName);
 	}
@@ -522,7 +535,7 @@ void saveSettings()
 	free(buffer);
 	
 	// Making a readMe file to put any infomation about why you are saving this run.
-	system("gedit readMe");
+	// Note: Edit the 'readMe' file in the saved run directory to add notes about this run.
 	
 	// Moving back to the SVT directory.
 	chdir("../");
