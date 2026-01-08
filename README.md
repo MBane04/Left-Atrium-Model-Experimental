@@ -121,6 +121,17 @@ cmake --build build
 ./build/svt.exe
 ```
 
+#### Packaging (Windows)
+Create a portable zip with the executable, setups, and data:
+```powershell
+# From the repo root in PowerShell
+.\scripts\package.ps1 -Name LeftAtriumModel
+
+# If your execution policy blocks scripts, use:
+PowerShell -NoProfile -ExecutionPolicy Bypass -File .\scripts\package.ps1 -Name LeftAtriumModel
+```
+The zip is written to the `dist` folder.
+
 ### Linux
 
 #### Prerequisites:
