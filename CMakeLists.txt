@@ -78,6 +78,7 @@ target_link_libraries(svt PRIVATE
 add_executable(make_nodes_and_muscles
     MakeNodesAndMuscleFiles/makeNodesAndMusclesFile.cu
 )
+set_target_properties(make_nodes_and_muscles PROPERTIES
     CUDA_SEPARABLE_COMPILATION ON
     CUDA_ARCHITECTURES native
 )
