@@ -100,7 +100,13 @@ Video Realistic LA: 		https://youtu.be/G_ZcHeLRRjc
    winget install Ninja-build.Ninja
    ```
 
-5. **Restart VS Code** after installations so PATH updates apply.
+5. **FFmpeg (only if using Record Video/Screenshot)**:
+	 ```powershell
+	 winget install --id Gyan.FFmpeg -e
+	 ffmpeg -version
+	 ```
+
+6. **Restart VS Code** after installations so PATH updates apply.
 
 #### Building:
 ```powershell
@@ -255,6 +261,12 @@ cmake --build build
 | **Find Nodes** | Finds the ID of the top-most and front-most node |
 | **Save State** | Saves complete simulation state for short-term use |
 | **Load State** | Restores simulation from saved state |
+
+Note: **Record Video** and **Screenshot** features require FFmpeg. On Windows:
+```powershell
+winget install --id Gyan.FFmpeg -e
+ffmpeg -version
+```
 
 <a id="changelog"></a>
 ## Changelog

@@ -14,9 +14,14 @@ How to build:
         4. Install Ninja:
             winget install Ninja-build.Ninja
 
-        5. Restart VS Code so PATH updates apply.
+        5. (Optional) Install FFmpeg (required for Record Video/Screenshot):
+            winget install --id Gyan.FFmpeg -e
+            Then open a new terminal and verify:
+                ffmpeg -version
 
-        6. Configure and build:
+        6. Restart VS Code so PATH updates apply.
+
+        7. Configure and build:
             cmake -S . -B build
             cmake --build build
             
